@@ -1,6 +1,14 @@
 # Cloud-Native Task Management API
 Backend portfolio project aligned to ANZSCO 261312 (Developer Programmer).
 
+## Portfolio Context
+- Full ANZSCO 261312 portfolio landing page: [projects-workspaces](https://github.com/jen-the-dev/projects-workspaces)
+- Application cover letter template: [cover-letter-anzsco-261312.md](https://github.com/jen-the-dev/cicd-automated-infrastructure/blob/main/cover-letter-anzsco-261312.md)
+- Related core showcase repositories:
+  - [multi-platform-ecommerce-web-app](https://github.com/jen-the-dev/multi-platform-ecommerce-web-app)
+  - [realtime-data-streaming-dashboard](https://github.com/jen-the-dev/realtime-data-streaming-dashboard)
+  - [cicd-automated-infrastructure](https://github.com/jen-the-dev/cicd-automated-infrastructure)
+
 ## Problem
 Small teams need a reliable task service with clean API design, predictable status transitions, and fast list queries under repeated reads.
 
