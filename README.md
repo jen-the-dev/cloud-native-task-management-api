@@ -1,62 +1,61 @@
 # Cloud-Native Task Management API
 Backend portfolio project aligned to ANZSCO 261312 (Developer Programmer).
 
-## Recruiter quick view
-- Focus: backend API design, service reliability, and data-layer integration.
-- Business scenario: task management service with status transitions and cache-accelerated reads.
-- Stack signal: Node.js/Express, Redis caching, PostgreSQL-ready service wiring, Docker, CI.
-- Current maturity: production-style scaffold with clear extension points for auth, persistence, and testing.
+## Problem
+Small teams need a reliable task service with clean API design, predictable status transitions, and fast list queries under repeated reads.
 
-## ANZSCO 261312 competency mapping
-- **Designing and documenting software solutions**
-  - Defined REST endpoints and status-transition workflow for task lifecycle.
-  - Structured environment-based service configuration for local and containerized execution.
-- **Writing and maintaining application code**
-  - Implemented task create/list/update-status routes with validation and error responses.
-  - Added cache-first read strategy with invalidation on write operations.
-- **Integrating with data and platform services**
-  - Wired Redis client lifecycle and health checks.
-  - Prepared database connectivity contract via `DATABASE_URL` for PostgreSQL migration.
-- **Testing, debugging, and quality support**
-  - Added service health endpoint and starter CI check workflow.
-  - Introduced predictable project structure for maintainability and onboarding.
+## Solution
+This project implements a containerized REST API with:
+- task create/list/status-update endpoints,
+- health/readiness checks,
+- Redis-backed read caching with mutation invalidation,
+- CI checks and automated test execution.
 
-## Evidence map (where reviewers should look)
-- API implementation: `api/src/index.js`
-- Runtime configuration: `api/.env.example`
-- Containerized environment: `docker-compose.yml`
-- CI pipeline starter: `.github/workflows/ci.yml`
+## Architecture Diagram
+```mermaid
+flowchart LR
+  Client["Client / API Consumer"] --> API["Express API"]
+  API --> Store["Task Store (Domain Logic)"]
+  API --> Redis["Redis Cache"]
+  API -.database contract.-> Postgres["PostgreSQL (planned persistence)"]
+  CI["GitHub Actions CI"] --> API
+```
 
-## Tech stack
-- Node.js (Express)
-- PostgreSQL (integration-ready)
+## Tech Stack
+- Node.js + Express
 - Redis
+- PostgreSQL (integration-ready contract)
 - Docker Compose
 - GitHub Actions
 
-## Implemented scope (current)
-- `/health` endpoint with cache dependency status.
-- Task CRUD subset:
-  - `GET /tasks`
-  - `POST /tasks`
-  - `PATCH /tasks/:id/status`
-- Input validation and HTTP error handling.
-- Redis read caching and cache invalidation on mutations.
-
-## Quick start
+## Setup Instructions
 1. `cd api && npm install`
 2. `cp .env.example .env`
 3. `cd .. && docker compose up --build`
 4. Open `http://localhost:4000/health`
 
-## 5-minute demo flow for interviews
-1. Start stack with Docker Compose.
-2. Show health/readiness response.
-3. Create tasks and update status via API calls.
-4. Explain cache hit/miss behavior and invalidation strategy.
-5. Walk through the path to PostgreSQL-backed persistence.
+## Testing
+- Unit and integration tests:
+  - `cd api && npm test`
+- Static syntax check:
+  - `cd api && npm run check`
 
-## Next milestones to strengthen application evidence
-- Implement JWT authentication and role-based authorization.
-- Replace in-memory task store with PostgreSQL tables and migrations.
-- Add unit/integration tests and OpenAPI documentation.
+## ANZSCO 261312 Competency Evidence
+- **Software design and development**: layered API app/store structure in `api/src/app.js` and `api/src/taskStore.js`.
+- **Programming and integration**: endpoint implementation and cache behavior in `api/src/app.js`.
+- **Testing and quality assurance**: unit tests in `api/test/taskStore.unit.test.js`, integration tests in `api/test/app.integration.test.js`.
+- **Deployment and maintenance awareness**: container orchestration in `docker-compose.yml`, CI automation in `.github/workflows/ci.yml`.
+
+## Commit Convention
+Use Conventional Commits for recruiter/assessor readability:
+- `feat(api): add JWT authentication middleware`
+- `fix(cache): invalidate task list cache on status update`
+- `test(api): add integration test for task status endpoint`
+- `docs(readme): add architecture diagram and setup clarifications`
+
+## Evidence Map
+- Service entrypoint: `api/src/index.js`
+- API composition: `api/src/app.js`
+- Domain logic: `api/src/taskStore.js`
+- Tests: `api/test/`
+- CI pipeline: `.github/workflows/ci.yml`
