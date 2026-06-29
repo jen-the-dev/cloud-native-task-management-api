@@ -1,13 +1,9 @@
 # Cloud-Native Task Management API
-Backend portfolio project aligned to ANZSCO 261312 (Developer Programmer).
+HTTP API for task lifecycle management with clean REST design, status transitions, and test-backed delivery patterns.
 
-## Portfolio Context
-- Full ANZSCO 261312 portfolio landing page: [projects-workspaces](https://github.com/jen-the-dev/projects-workspaces)
-- Application cover letter template: [cover-letter-anzsco-261312.md](https://github.com/jen-the-dev/cicd-automated-infrastructure/blob/main/cover-letter-anzsco-261312.md)
-- Related core showcase repositories:
-  - [multi-platform-ecommerce-web-app](https://github.com/jen-the-dev/multi-platform-ecommerce-web-app)
-  - [realtime-data-streaming-dashboard](https://github.com/jen-the-dev/realtime-data-streaming-dashboard)
-  - [cicd-automated-infrastructure](https://github.com/jen-the-dev/cicd-automated-infrastructure)
+## Related
+- Shipped work index: [projects-workspaces](https://github.com/jen-the-dev/projects-workspaces)
+- Resume and cover letter: [nz-immigration-application-tracker](https://github.com/jen-the-dev/nz-immigration-application-tracker)
 
 ## Problem
 Small teams need a reliable task service with clean API design, predictable status transitions, and fast list queries under repeated reads.
@@ -47,12 +43,6 @@ flowchart LR
   - `cd api && npm test`
 - Static syntax check:
   - `cd api && npm run check`
-
-## ANZSCO 261312 Competency Evidence
-- **Software design and development**: layered API app/store structure in `api/src/app.js` and `api/src/taskStore.js`.
-- **Programming and integration**: endpoint implementation and cache behavior in `api/src/app.js`.
-- **Testing and quality assurance**: unit tests in `api/test/taskStore.unit.test.js`, integration tests in `api/test/app.integration.test.js`.
-- **Deployment and maintenance awareness**: container orchestration in `docker-compose.yml`, CI automation in `.github/workflows/ci.yml`.
 
 ## Commit Convention
 Use Conventional Commits for recruiter/assessor readability:
